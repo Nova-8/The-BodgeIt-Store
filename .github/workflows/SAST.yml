@@ -1,0 +1,26 @@
+name: Checkmarx SAST Scan
+on:
+  push:
+    branches:
+      - main
+    
+jobs:
+  Checkmarx_Scan:
+    runs-on: self-hosted
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Checkmarx CxFlow Action
+      uses: checkmarx-ts/checkmarx-cxflow-github-action@v1.5
+      with:
+        project: ${{github.repository_owner}}/${{github.event.repository.name}}
+        team: ${{ secrets.CHECKMARX_TEAMS }}
+        checkmarx_url: ${{ secrets.CHECKMARX_URL_SAST }}
+        checkmarx_username: ${{ secrets.CHECKMARX_USER }}
+        checkmarx_password: ${{ secrets.CHECKMARX_PASSWORD }}
+        checkmarx_client_secret: ${{ secrets.CHECKMARX_CLIENT_SECRET }}
+        scan-preset: ${{vars.PRESET_NAME}}
+        scanners: sast
+        incremental: true
+        block-merge: true
+        params: --checkmarx.settings-override=true --namespace=${{ github.repository_owner }} --repo-name=${{ github.event.repository.name }} --branch=${{ github.ref }} --cx-flow.filterSeverity --cx-flow.filterCategory --cx-flow.thresholds.High=0 --cx-flow.thresholds.Medium=0 
