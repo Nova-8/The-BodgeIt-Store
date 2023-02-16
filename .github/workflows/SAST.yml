@@ -23,4 +23,4 @@ jobs:
         scanners: sast
         incremental: true
         block-merge: true
-        params: --checkmarx.settings-override=true --namespace=${{ github.repository_owner }} --repo-name=${{ github.event.repository.name }} --branch=${{ github.ref }} --cx-flow.filterSeverity --cx-flow.filterCategory --cx-flow.thresholds.High=0 --cx-flow.thresholds.Medium=0 
+        params: --checkmarx.settings-override=true --namespace=${{ github.repository_owner }} --repo-name=${{ github.event.repository.name }} --branch=${{ github.ref }} --cx-flow.filterSeverity --cx-flow.filterCategory --cx-flow.thresholds.High=0 --cx-flow.thresholds.Medium=0 --cx-flow.filterStatus=New 
