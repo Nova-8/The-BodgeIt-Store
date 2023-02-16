@@ -1,6 +1,6 @@
 #01_vulnerabilidade_alta
 #01_vulnerabilidade_media
-#acjhf
+#acjhfadsfdf
 $(document).ready(function () {
     $("#postComment").on("click", function () {
         var commentInput = $("#commentInput").val();
