@@ -25,6 +25,6 @@ jobs:
         sca_tenant: SCANFR_NOVA8
         sca_username: ${{ secrets.CHECKMARX_SCA_USERNAME }}
         sca_password: ${{ secrets.CHECKMARX_SCA_PASSWORD }}
-        scanners: sast
+        scanners: sast, sca
         params: --checkmarx.settings-override=true --namespace=${{ github.repository_owner }} --repo-name=${{ github.event.repository.name }} --branch=${{ github.ref }} --cx-flow.filterSeverity --cx-flow.filterCategory
 
