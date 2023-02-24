@@ -19,9 +19,6 @@ jobs:
         checkmarx_username: ${{ secrets.CHECKMARX_USER }}
         checkmarx_password: ${{ secrets.CHECKMARX_PASSWORD }}
         checkmarx_client_secret: ${{ secrets.CHECKMARX_CLIENT_SECRET }}
-        scan-preset: ${{vars.PRESET_NAME}}
         scanners: sast
-        incremental: true
-        block-merge: true
         params: --checkmarx.settings-override=true --namespace=${{ github.repository_owner }} --repo-name=${{ github.event.repository.name }} --branch=${{ github.ref }} --cx-flow.filterSeverity --cx-flow.filterCategory
 
