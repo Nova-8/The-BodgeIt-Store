@@ -1,6 +1,6 @@
 name: Checkmarx SAST Scan
 on:
-  pull_request:
+  push:
     branches:
       - main
     
@@ -21,8 +21,7 @@ jobs:
         checkmarx_client_secret: ${{ secrets.CHECKMARX_CLIENT_SECRET }}
         scan-preset: ${{vars.PRESET_NAME}}
         scanners: sast
-        exclude-files: "*.tst,*.json,*.png,*.jpeg,*.img,*.gif"
         incremental: true
         block-merge: true
-        params: --checkmarx.settings-override=true --namespace=${{ github.repository_owner }} --repo-name=${{ github.event.repository.name }} --branch=${{ github.ref }} --cx-flow.filterSeverity --cx-flow.filterCategory --cx-flow.thresholds.High=0 --cx-flow.thresholds.Medium=0 --cx-flow.filterStatus="New" 
+        params: --checkmarx.settings-override=true --namespace=${{ github.repository_owner }} --repo-name=${{ github.event.repository.name }} --branch=${{ github.ref }} --cx-flow.filterSeverity --cx-flow.filterCategory
 
