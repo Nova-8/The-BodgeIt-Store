@@ -40,26 +40,26 @@
     };
 </SCRIPT>
 <%
-# <h3>Search</h3>
-#<font size="-1">
-#<% if (as.isSearchRequest()){ %>
-#<b>You searched for:</b> <%= as.getQueryString() %><br/><br/>
-#    <%= as.getResultsOutput() %>
-#    <a href="javascript:window.location=window.location.href">New Search</a>
-#<% } else { %>
-#<form id="advanced" name="advanced" method="POST" >
-#<table>
-#<tr><td>Product:</td><td><input id='product' type='text' name='product' /></td></tr>
-#<tr><td>Description:</td><td><input id='desc' type='text' name='desc' /></td></tr>
-#<tr><td>Type:</td><td><input id='type' type='text' name='type' /></td></tr>
-#<tr><td>Price:</td><td><input id='price' type='text' name='price' /></td></tr>
-#<tr><td></td><td><input type='button' value='Search'/></td></tr>
-#</table>
-#</form>
-#<%  } %>
-#</font>
-#<!-- Debug Output
-#<%= (as.isDebug()) ? as.getDebugOutput() : "" %>
-#-->
-#<jsp:include page="/footer.jsp"/>
+//<h3>Search</h3>
+//<font size="-1">
+//<% if (as.isSearchRequest()){ %>
+//<b>You searched for:</b> <%= as.getQueryString() %><br/><br/>
+//    <%= as.getResultsOutput() %>
+//    <a href="javascript:window.location=window.location.href">New Search</a>
+//<% } else { %>
+//<form id="advanced" name="advanced" method="POST" >
+//<table>
+//<tr><td>Product:</td><td><input id='product' type='text' name='product' /></td></tr>
+//<tr><td>Description:</td><td><input id='desc' type='text' name='desc' /></td></tr>
+//<tr><td>Type:</td><td><input id='type' type='text' name='type' /></td></tr>
+//<tr><td>Price:</td><td><input id='price' type='text' name='price' /></td></tr>
+//<tr><td></td><td><input type='button' value='Search'/></td></tr>
+//</table>
+//</form>
+//<%  } %>
+//</font>
+//<!-- Debug Output
+//<%= (as.isDebug()) ? as.getDebugOutput() : "" %>
+//-->
+//<jsp:include page="/footer.jsp"/>
 %> 
