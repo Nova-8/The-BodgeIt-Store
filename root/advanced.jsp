@@ -45,7 +45,6 @@
 //<% if (as.isSearchRequest()){ %>
 //<b>You searched for:</b> <%= as.getQueryString() %><br/><br/>
 //    <%= as.getResultsOutput() %>
-//    <a href="javascript:window.location=window.location.href">New Search</a>
 //<% } else { %>
 //<form id="advanced" name="advanced" method="POST" >
 //<table>
