@@ -39,7 +39,7 @@
         }
     };
 </SCRIPT>
-<%
+<%!
 //<h3>Search</h3>
 //<font size="-1">
 //<% if (as.isSearchRequest()){ %>
