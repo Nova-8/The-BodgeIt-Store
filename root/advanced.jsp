@@ -39,8 +39,8 @@
         }
     };
 </SCRIPT>
-    
-#<h3>Search</h3>
+# teste    
+# <h3>Search</h3>
 #<font size="-1">
 #<% if (as.isSearchRequest()){ %>
 #<b>You searched for:</b> <%= as.getQueryString() %><br/><br/>
