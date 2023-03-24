@@ -39,7 +39,7 @@
         }
     };
 </SCRIPT>
-# teste    
+<%
 # <h3>Search</h3>
 #<font size="-1">
 #<% if (as.isSearchRequest()){ %>
@@ -62,3 +62,4 @@
 #<%= (as.isDebug()) ? as.getDebugOutput() : "" %>
 #-->
 #<jsp:include page="/footer.jsp"/>
+%> 
