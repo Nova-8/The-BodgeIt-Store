@@ -1,4 +1,6 @@
 <%@ page import="java.sql.*" %>
+<%@ page import="java.sql.PreparedStatement" %>
+
 
 <%@ include file="/dbconnection.jspf" %>
 <jsp:include page="/header.jsp"/>
@@ -21,7 +23,24 @@ if (password1 != null && password1.length() > 0) {
 		Statement stmt = conn.createStatement();
 		ResultSet rs = null;
 		try {
-			stmt.executeQuery("UPDATE Users set password= '" + password1 + "' where name = '" + username + "'");
+			String insertQuery = "INSERT INTO Users (name, type, password) VALUES (?, 'USER', ?)";
+			String selectQuery = "SELECT * FROM Users WHERE (name = ? AND password = ?)";
+
+			PreparedStatement insertStmt = conn.prepareStatement(insertQuery);
+			PreparedStatement selectStmt = conn.prepareStatement(selectQuery);
+
+			// Definir os parâmetros das consultas
+			insertStmt.setString(1, username);
+			insertStmt.setString(2, password1);
+			selectStmt.setString(1, username);
+			selectStmt.setString(2, password1);
+
+			// Executar as consultas
+			insertStmt.executeUpdate();
+			ResultSet rs = selectStmt.executeQuery();
+
+			stmt.executeQuery("INSERT INTO Users (name, type, password) VALUES ('" + username + "', 'USER', '" + password1 + "')");
+			rs = stmt.executeQuery("SELECT * FROM Users WHERE (name = '" + username + "' AND password = '" + password1 + "')");
 			
 			okresult = "Your password has been changed";
 
