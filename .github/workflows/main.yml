@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3.2.0
       - name: Checkmarx One CLI Action
         uses: Checkmarx/ast-github-action@2.0.20
         with:
@@ -22,3 +22,4 @@ jobs:
           namespace: ${{github.repository_owner}}
           pr_number: ${{github.event.number}}
           additional_params: --debug --async --sast-incremental --sast-filter '!vul,!swagger,!docs,!*_test.go' --sca-filter '!root' --iac-security-filter '!infra'
+
