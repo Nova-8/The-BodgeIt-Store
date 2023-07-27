@@ -10,7 +10,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Checkmarx One CLI Action
-        uses: Checkmarx/ast-github-action@main
+        uses: Checkmarx/ast-github-action@2.0.20
         with:
           base_uri: ${{secrets.CHECKMARX_URL}}
           cx_tenant: ${{secrets.CX_TENANT}}
@@ -21,4 +21,4 @@ jobs:
           repo_name: ${{github.event.repository.name}}
           namespace: ${{github.repository_owner}}
           pr_number: ${{github.event.number}}
-          additional_params: --async --sast-incremental --sast-filter '!vul,!swagger,!docs,!*_test.go' --sca-filter '!root' --iac-security-filter '!infra'
+          additional_params: --debug --async --sast-incremental --sast-filter '!vul,!swagger,!docs,!*_test.go' --sca-filter '!root' --iac-security-filter '!infra'
