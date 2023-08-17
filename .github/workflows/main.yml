@@ -2,7 +2,7 @@ name: Checkmarx One Scan
 on:
   pull_request:
     branches:
-    - main
+    - patch-5
 jobs:
   build:
     runs-on: ubuntu-latest
