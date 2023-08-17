@@ -1,32 +1,23 @@
-name: Checkmarx AST scan
-
+name: Checkmarx One Scan
 on:
-  push:
-    branches:
-      - main
   pull_request:
     branches:
-      - main
-      - staging
-
+    - main
 jobs:
-  push_scan_target_branch:
-    if: github.event_name == 'push'
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.2.0     
-
-      - name: Checkmarx One - Check vulnerabilities
-        uses: checkmarx/ast-github-action@main
+        uses: actions/checkout@v3.2.0
+      - name: Checkmarx One CLI Action
+        uses: Checkmarx/ast-github-action@main
         with:
           base_uri: ${{secrets.CHECKMARX_URL}}
           cx_tenant: ${{secrets.CX_TENANT}}
           cx_client_id: ${{secrets.CX_CLIENT_ID}}
           cx_client_secret: ${{secrets.CX_CLIENT_SECRET}}
           project_name: ${{github.repository_owner}}/${{github.event.repository.name}}
-          branch: ${{github.head_ref}}
+          branch: ${{github.ref}}
           repo_name: ${{github.event.repository.name}}
           namespace: ${{github.repository_owner}}
-          pr_number: ${{github.event.number}}
-          additional_params: --async --sast-incremental --sast-filter '!vul,!swagger,!docs,!*_test.go' --sca-filter '!root' --iac-security-filter '!infra'
+          additional_params: --async --sast-filter '!vul,!swagger,!docs,!*_test.go' --sca-filter '!root' --iac-security-filter '!infra'
