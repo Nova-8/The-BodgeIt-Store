@@ -17,7 +17,8 @@ jobs:
           cx_client_id: ${{secrets.CX_CLIENT_ID}}
           cx_client_secret: ${{secrets.CX_CLIENT_SECRET}}
           project_name: ${{github.repository_owner}}/${{github.event.repository.name}}
-          branch: ${{github.ref}}
+          branch: ${{github.head_ref}}
           repo_name: ${{github.event.repository.name}}
           namespace: ${{github.repository_owner}}
-          additional_params: --async --sast-filter '!vul,!swagger,!docs,!*_test.go' --sca-filter '!root' --iac-security-filter '!infra'
+          pr_number: ${{github.event.number}}
+          additional_params: --async
