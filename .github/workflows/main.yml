@@ -18,6 +18,4 @@ jobs:
           cx_client_secret: ${{secrets.CX_CLIENT_SECRET}}
           project_name: ${{github.repository_owner}}/${{github.event.repository.name}}
           branch: ${{github.head_ref}}
-          repo_name: ${{github.event.repository.name}}
-          namespace: ${{github.repository_owner}}
           additional_params: '--async'
