@@ -20,4 +20,4 @@ jobs:
           branch: ${{github.ref}}
           repo_name: ${{github.event.repository.name}}
           namespace: ${{github.repository_owner}}
-          additional_params: --async --sast-filter '!vul,!swagger,!docs,!*_test.go' --sca-filter '!root' --iac-security-filter '!infra'
+          additional_params: --async
