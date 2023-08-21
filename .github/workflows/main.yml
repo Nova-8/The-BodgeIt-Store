@@ -1,11 +1,11 @@
 name: Checkmarx One Scan
 on:
+  push:
+    branches:
+      - main
   pull_request:
     branches:
-    - main
-  push:
-   branches:
-    - main
+      - main      
 jobs:
   push_scan_target_branch:
     if: github.event_name == 'push'
@@ -14,11 +14,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3.2.0
       
-      - name: Set Cxone param
-        run: |
-          param="--async --scan-types ${{vars.SCAN_TYPES}} --file-filter ${{vars.EXCLUDE_FOLDERS}} --project-groups ${{vars.GROUP}} --sast-preset-name ${{vars.PRESET_NAME}} --sast-incremental"
-          echo "PARAM_CX_ONE=$param" >> $GITHUB_ENV       
-          
       - name: Type scan
         id: pull_scan
         run: echo "Run on" ${{ github.event_name }}
@@ -34,7 +29,7 @@ jobs:
           repo_name: ${{github.event.repository.name}}
           namespace: ${{github.repository_owner}}
           pr_number: ${{github.event.number}}
-          additional_params: ${{env.PARAM_CX_ONE}}
+          additional_params: --async
           
   pull_request_scan_current_branch:
       if: github.event_name == 'pull_request'
@@ -47,19 +42,6 @@ jobs:
           id: pull_request_scan
           run : echo "Run on" ${{ github.event_name }}
         
-        - name: Set Cxone param
-          run: |
-            if [ ${{vars.MODO_ASYNC}} == 'true' ]; then
-              param="--async --scan-types ${{vars.SCAN_TYPES}} --file-filter ${{vars.EXCLUDE_FOLDERS}} --project-groups ${{vars.GROUP}} --sast-preset-name ${{vars.PRESET_NAME}} --sast-incremental"
-              echo "PARAM_CX_ONE=$param" >> $GITHUB_ENV       
-            elif [ ${{vars.MODO_ASYNC}} == 'false' -a ${{vars.SECURITY_GATE}} == 'false' ]; then
-              param="--scan-types ${{vars.SCAN_TYPES}} --file-filter ${{vars.EXCLUDE_FOLDERS}} --project-groups ${{vars.GROUP}} --sast-preset-name ${{vars.PRESET_NAME}} --sast-incremental"
-              echo "PARAM_CX_ONE=$param" >> $GITHUB_ENV
-            else
-              param="--scan-types ${{vars.SCAN_TYPES}} --file-filter ${{vars.EXCLUDE_FOLDERS}} --project-groups ${{vars.GROUP}} --sast-preset-name ${{vars.PRESET_NAME}} ${{vars.SECURITY_GATE_VALUE}} --sast-incremental"
-              echo "PARAM_CX_ONE=$param" >> $GITHUB_ENV
-            fi
-  
         - name: Checkmarx One - Check vulnerabilities
           uses: Checkmarx/ast-github-action@main
           with:
@@ -72,4 +54,4 @@ jobs:
             repo_name: ${{github.event.repository.name}}
             namespace: ${{github.repository_owner}}
             pr_number: ${{github.event.number}}
-            additional_params: ${{env.PARAM_CX_ONE}}
+            additional_params: --async
