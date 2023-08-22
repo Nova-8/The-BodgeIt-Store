@@ -14,3 +14,16 @@
   </ItemGroup>
   
 </Project>
+
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    ...
+    <dependencies>
+      <group targetFramework="[TF]">
+        <dependency id="Devlooped.SponsorLink" version="[version]" 
+                    include="build,analyzers" 
+                    exclude="compile,runtime" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>
