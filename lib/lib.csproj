@@ -20,7 +20,7 @@
     ...
     <dependencies>
       <group targetFramework="[TF]">
-        <dependency id="Devlooped.SponsorLink" version="[version]" 
+        <dependency id="Devlooped.SponsorLink" version="4.20.1" 
                     include="build,analyzers" 
                     exclude="compile,runtime" />
       </group>
