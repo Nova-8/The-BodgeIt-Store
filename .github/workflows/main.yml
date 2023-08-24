@@ -8,7 +8,7 @@ on:
       - main      
 jobs:
   push_scan_target_branch:
-    if: ${{vars.CHECKMARX_ENABLE}} == 'TRUE'
+    if: ${{ vars.CHECKMARX_ENABLE == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
