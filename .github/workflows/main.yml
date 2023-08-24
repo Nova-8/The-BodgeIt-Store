@@ -8,16 +8,11 @@ on:
       - main      
 jobs:
   push_scan_target_branch:
-    if: github.event_name == 'push'
+    if: CHECKMARX_ENABLE == TRUE
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.2.0
-      
-      - name: Type scan
-        id: pull_scan
-        run: echo "Run on" ${{ github.event_name }}
-      
+        uses: actions/checkout@v3.2.0     
       - name: Checkmarx One - Check vulnerabilities
         uses: Checkmarx/ast-github-action@main
         with:
@@ -29,29 +24,4 @@ jobs:
           repo_name: ${{github.event.repository.name}}
           namespace: ${{github.repository_owner}}
           pr_number: ${{github.event.number}}
-          additional_params: --async --scan-types ${{vars.SCAN_TYPES}}
-          
-  pull_request_scan_current_branch:
-      if: github.event_name == 'pull_request'
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v3.2.0
-  
-        - name: Type scan
-          id: pull_request_scan
-          run : echo "Run on" ${{ github.event_name }}
-        
-        - name: Checkmarx One - Check vulnerabilities
-          uses: Checkmarx/ast-github-action@main
-          with:
-            base_uri: ${{secrets.CHECKMARX_URL}}
-            cx_tenant: ${{secrets.CX_TENANT}}
-            cx_client_id: ${{secrets.CX_CLIENT_ID}}
-            cx_client_secret: ${{secrets.CX_CLIENT_SECRET}}
-            project_name: ${{github.repository_owner}}/${{github.event.repository.name}}
-            branch: ${{github.head_ref}}
-            repo_name: ${{github.event.repository.name}}
-            namespace: ${{github.repository_owner}}
-            pr_number: ${{github.event.number}}
-            additional_params: --async
+          additional_params: --sast-incremental
