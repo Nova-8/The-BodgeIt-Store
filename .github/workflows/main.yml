@@ -3,9 +3,6 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main      
 jobs:
   push_scan_target_branch:
     runs-on: ubuntu-latest
