@@ -1,23 +1,23 @@
-name: Checkmarx One Scan
+name: Checkmarx AST Github Action
+# Controls when the workflow will run
 on:
   push:
-    branches:
-      - main
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
 jobs:
-  push_scan_target_branch:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.2.0     
-      - name: Checkmarx One - Check vulnerabilities
-        uses: Checkmarx/ast-github-action@main
+        uses: actions/checkout@v3
+      - name: Checkmarx AST Github Action
+        uses: checkmarx/ast-github-action@main #Github Action version
         with:
-          base_uri: ${{secrets.CHECKMARX_URL}}
+          base_uri: https://eu.ast.checkmarx.net/
           cx_tenant: ${{secrets.CX_TENANT}}
           cx_client_id: ${{secrets.CX_CLIENT_ID}}
           cx_client_secret: ${{secrets.CX_CLIENT_SECRET}}
-          project_name: ${{github.repository_owner}}/${{github.event.repository.name}}
-          repo_name: ${{github.event.repository.name}}
-          namespace: ${{github.repository_owner}}
-          branch: ${{github.head_ref}}
-          additional_params: --sast-incremental
+          branch: ${{ github.ref }}
