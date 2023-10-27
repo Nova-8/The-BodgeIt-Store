@@ -14,10 +14,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Checkmarx AST Github Action
-        uses: Checkmarx/ast-github-action@2.0.20
+        uses: Checkmarx/ast-github-action@2.0.21
         with:
           base_uri: https://eu.ast.checkmarx.net/
           cx_tenant: ${{secrets.CX_TENANT}}
           cx_client_id: ${{secrets.CX_CLIENT_ID}}
           cx_client_secret: ${{secrets.CX_CLIENT_SECRET}}
-          additional_params: --scan-types sca --threshold sca-medium=6 --debug
+          additional_params: --scan-types sca --threshold sca-medium=0 --debug
